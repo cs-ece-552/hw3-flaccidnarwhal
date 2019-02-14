@@ -179,13 +179,13 @@ R8
 !i113 1
 R6
 vrca_16b
-R0
+!s110 1550177028
 !i10b 1
-!s100 nKP6=4BS_i6XaVYX_PR=g1
-IKW8SKVlkPUbWUCcUSK2PX3
+!s100 N>;`;lV>Qz5m]3[:41h4O1
+I9Q[UlhoPY`0l;0RB[Z<g70
 R1
 R2
-R3
+w1550177024
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v
 L0 7
@@ -193,7 +193,7 @@ R4
 r1
 !s85 0
 31
-R5
+!s108 1550177028.000000
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v|
 !s101 -O0

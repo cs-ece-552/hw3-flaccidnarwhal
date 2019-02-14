@@ -33,6 +33,13 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	not1
 
+} {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v {1 {vlog -work work -stats=none {C:\Users\Mandy\Documents\School\ECE552\becker23-hw3\hw3-flaccidnarwhal\hw3_2\rca_4b.v}
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module rca_4b
+
+Top level modules:
+	rca_4b
+
 } {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand2.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand2.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module nand2
@@ -47,19 +54,12 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	nand3
 
-} {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v
+} {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_1b.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_1b.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module rca_16b
+-- Compiling module fullAdder_1b
 
 Top level modules:
-	rca_16b
-
-} {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module clkrst
-
-Top level modules:
-	clkrst
+	fullAdder_1b
 
 } {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor2.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor2.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
@@ -67,6 +67,13 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 
 Top level modules:
 	xor2
+
+} {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v
+Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+-- Compiling module clkrst
+
+Top level modules:
+	clkrst
 
 } {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor3.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor3.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
