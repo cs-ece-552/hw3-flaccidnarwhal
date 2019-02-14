@@ -1,4 +1,4 @@
-module rca_4b_tb;
+module rca_4b_bench;
 
   reg [3: 0] A, B;
   reg C_in;
