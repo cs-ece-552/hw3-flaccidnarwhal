@@ -40,13 +40,6 @@ Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 
 Top level modules:
 	nand2
 
-} {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v
-Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
--- Compiling module rca_4b
-
-Top level modules:
-	rca_4b
-
 } {} {}} C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand3.v {1 {vlog -work work -stats=none C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand3.v
 Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
 -- Compiling module nand3
