@@ -9,13 +9,13 @@ z2
 cModel Technology
 dC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_1
 vclkrst
-Z0 !s110 1550174348
+Z0 !s110 1550248218
 !i10b 1
 !s100 d1=HFa9@5T7JH2L8mb3gE1
 IU;02`I]]8mXE>AV]D<fao3
 Z1 VDg1SIo80bB@j0V0VzS_@n1
 Z2 dC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2
-Z3 w1550012265
+Z3 w1550248056
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v
 L0 12
@@ -23,20 +23,20 @@ Z4 OP;L;10.4a;61
 r1
 !s85 0
 31
-Z5 !s108 1550174348.000000
+Z5 !s108 1550248218.000000
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/clkrst.v|
 !s101 -O0
 !i113 1
 Z6 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact -O0
 vfullAdder_1b
-Z7 !s110 1550174347
+Z7 !s110 1550248216
 !i10b 1
-!s100 :A1bCnMoImCbU=XG29REm1
-IlfcIl?nLW5f7GK;@H8U@;1
+!s100 AUgJC9j[gS9X:oT5COBGB2
+IYcB]7FYY<LQJT]dSKh5VA3
 R1
 R2
-w1550173081
+R3
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_1b.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_1b.v
 L0 7
@@ -44,7 +44,7 @@ R4
 r1
 !s85 0
 31
-Z8 !s108 1550174347.000000
+Z8 !s108 1550248216.000000
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_1b.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_1b.v|
 !s101 -O0
@@ -58,7 +58,7 @@ R7
 Ilc<@;3FQ[ZklQ9TSCRdTW3
 R1
 R2
-w1550172342
+R3
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_tb.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/fullAdder_tb.v
 L0 1
@@ -74,13 +74,13 @@ R8
 R6
 nfull@adder_tb
 vnand2
-R7
+Z9 !s110 1550248217
 !i10b 1
 !s100 @JLnM_lV[dSoG<b5oFSbC0
 I>Y]I]VfL@V5W;Mf<XLBzf1
 R1
 R2
-R3
+Z10 w1550248055
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand2.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand2.v
 L0 7
@@ -88,20 +88,20 @@ R4
 r1
 !s85 0
 31
-R8
+Z11 !s108 1550248217.000000
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand2.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand2.v|
 !s101 -O0
 !i113 1
 R6
 vnand3
-R7
+R9
 !i10b 1
 !s100 74U72gSXNGQC9QQ_6Vl@m3
 I[c19L3]d^TDFDK:;jOJl]1
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand3.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand3.v
 L0 7
@@ -109,20 +109,20 @@ R4
 r1
 !s85 0
 31
-R8
+R11
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand3.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nand3.v|
 !s101 -O0
 !i113 1
 R6
 vnor2
-R7
+R9
 !i10b 1
 !s100 zLY;3kAfYGCBXK2?=fzNd1
 IF9QeQ>E5l`EEh5OOKf0dF2
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor2.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor2.v
 L0 7
@@ -130,20 +130,20 @@ R4
 r1
 !s85 0
 31
-R8
+R11
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor2.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor2.v|
 !s101 -O0
 !i113 1
 R6
 vnor3
-R7
+R9
 !i10b 1
 !s100 M15<fJBSa=`jENU]=JkSO2
 IbVzWU9[32RhcUISZ[84Jj0
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor3.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor3.v
 L0 7
@@ -151,20 +151,20 @@ R4
 r1
 !s85 0
 31
-R8
+R11
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor3.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/nor3.v|
 !s101 -O0
 !i113 1
 R6
 vnot1
-R7
+R9
 !i10b 1
 !s100 E;?=8[YGePDM35<9b7^jF3
 I4joA[_mEbk7Rh^>k;;>dD2
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/not1.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/not1.v
 L0 7
@@ -172,20 +172,20 @@ R4
 r1
 !s85 0
 31
-R8
+R11
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/not1.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/not1.v|
 !s101 -O0
 !i113 1
 R6
 vrca_16b
-!s110 1550177028
+R0
 !i10b 1
 !s100 N>;`;lV>Qz5m]3[:41h4O1
 I9Q[UlhoPY`0l;0RB[Z<g70
 R1
 R2
-w1550177024
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v
 L0 7
@@ -193,7 +193,7 @@ R4
 r1
 !s85 0
 31
-!s108 1550177028.000000
+R11
 !s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v|
 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b.v|
 !s101 -O0
@@ -206,7 +206,7 @@ R0
 Icf5QhSBUnM1c[<W]6G9nR3
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b_bench.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_16b_bench.v
 L0 1
@@ -221,23 +221,23 @@ R5
 !i113 1
 R6
 vrca_4b
-!s110 1550174994
+R9
 !i10b 1
 !s100 W7Lch7iXdYc5FZc8cI?:P3
-I89S2G6HgjBgc2dS]LYQ_<3
+I^Zmdd3X;_hQN[29fW1VcE1
 R1
 R2
-w1550174990
-8C:\Users\Mandy\Documents\School\ECE552\becker23-hw3\hw3-flaccidnarwhal\hw3_2\rca_4b.v
-FC:\Users\Mandy\Documents\School\ECE552\becker23-hw3\hw3-flaccidnarwhal\hw3_2\rca_4b.v
+R10
+8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v
+FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v
 L0 7
 R4
 r1
 !s85 0
 31
-!s108 1550174994.000000
-!s107 C:\Users\Mandy\Documents\School\ECE552\becker23-hw3\hw3-flaccidnarwhal\hw3_2\rca_4b.v|
-!s90 -reportprogress|300|-work|work|-stats=none|C:\Users\Mandy\Documents\School\ECE552\becker23-hw3\hw3-flaccidnarwhal\hw3_2\rca_4b.v|
+R11
+!s107 C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/rca_4b.v|
 !s101 -O0
 !i113 1
 R6
@@ -248,7 +248,7 @@ R0
 Ih<5?XE4SiR8<zhB1V0F0^3
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor2.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor2.v
 L0 7
@@ -263,13 +263,13 @@ R5
 !i113 1
 R6
 vxor3
-R7
+R9
 !i10b 1
 !s100 `n11P3H6:oWD]59JZPJ[m2
 I2eDk5Z_==JLN0D@CPa`DI1
 R1
 R2
-R3
+R10
 8C:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor3.v
 FC:/Users/Mandy/Documents/School/ECE552/becker23-hw3/hw3-flaccidnarwhal/hw3_2/xor3.v
 L0 7

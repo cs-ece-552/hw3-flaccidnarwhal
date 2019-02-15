@@ -1,0 +1,13 @@
+Line 19: Bad keyword initial
+Line 20: begin without always/case
+Line 27: Bad keyword posedge
+Line 29: Bad keyword if
+Line 35: Bad keyword if
+Line 41: Bad keyword if
+Line 47: Bad keyword if
+Line 53: Bad keyword if
+Line 59: Bad keyword if
+Line 65: Bad keyword if
+Line 71: Bad keyword if
+Line 27: Always without case(x)
+End of file /u/a/m/amanda/private/ece552/becker23-hw3/hw3_2/fullAdder_tb.v. Hash = 2424705

@@ -1,0 +1,373 @@
+#!/bin/env python
+import os, subprocess, sys, re
+
+######################################################################################################################
+######################################################################################################################
+## Apr 8, 2013 - Written as a verbatim translation of wsrun.pl, written by Prof. Karu                               ##
+## Beta version - some testing done, seems to work                                                                  ##
+## ToDo - detect number of cores and spawn subprocesses using subprocess.call() to complete tests faster            ##
+## IMPORTANT - I have used 2 spaces as tab, change your editor to insert 2 spaces for tab to avoid syntax errors    ##
+## Kaushik Kannan - kkannan2@wisc.edu                                                                               ##
+######################################################################################################################
+######################################################################################################################
+
+open_wave_viewer = 0
+
+first_arg = ''
+do_file = ''
+prog_file = ''
+addr_file = ''
+file_list = ''
+prog_list = []
+step_count = 1
+brief = 0
+max_failures = 10
+n_cycles = 10000
+pipeline_mode = 0
+args = ''
+
+tb_top_module = ''
+v_files = []
+n_failures = 0
+trace_ext = ".trace"
+aligned = 0
+seed = 0
+compileonly = 0
+
+bin_root = "/u/s/i/sinclair/public/html/courses/cs552/spring2019/handouts/bins"
+
+def compile_verilog():
+  global tb_top_module
+  global v_files
+  tb_top_module = sys.argv.pop(0)
+
+  for arg in sys.argv:
+    if ".syn.v" in arg:
+      print "Skipping " + arg + ", seems like a file meant for synthesis"
+    else:
+      v_files.append(arg)
+
+  print_separator(1)
+
+  if not brief:
+    print "Compiling the following verilog files: "
+    for v_file in v_files:
+      print v_file
+    print "Top module: " + tb_top_module
+    print "Compilation log in wsrun.log"
+
+  cmds = []
+
+  cmds.append("rm -rf __work dump.wlf dump.vcd diff.trace diff.ptrace archsim.trace archsim.ptrace verilogsim.trace verilogsim.ptrace")
+  cmds.append("vlib __work")
+  cmds.append("vlog +define+RANDSEED=3 -work __work " + " ".join(v_files))
+
+  dummy = os.system("rm wsrun.log")
+  for cmd in cmds:
+    if brief:
+      cmd = cmd + " >> wsrun.log"
+    print "Executing " + cmd
+    dummy = os.system(cmd)
+  return
+
+def run_verilog():
+  global prog_file
+  global addr_file
+  global args
+  global do_file
+  global tb_top_module
+  global brief
+  print_separator(1)
+  print "Running Verilog simulation...details in wsrun.log"
+  cmds = []
+  if not seed:
+    seed_string = " "
+  else:
+    seed_string = "+seed=" + seed
+  if len(addr_file):
+    args = args + " +addr_trace_file_name=" + addr_file
+  if len(do_file):
+    cmds.append("echo 'run -all' | vsim " + seed_string + " " + args + " -c " + tb_top_module + " -lib __work -do " + do_file)
+    cmds.append("vcd2wlf dump.vcd dump.wlf")
+  else:
+    cmds.append("echo 'run -all' | vsim " + seed_string + " " + args + " -c " + tb_top_module + " -lib __work")
+    cmds.append("vcd2wlf dump.vcd dump.wlf")
+  for cmd in cmds:
+    if brief:
+      cmd = cmd + " >> wsrun.log"
+    dummy = os.system(cmd)
+
+  if os.access("dump.wlf", os.R_OK):
+    print_separator(1)
+    print "Verilog simulation successful";
+    if len(prog_list):
+      print "See verilogsim.log and verilogsim" + trace_ext + " for output"
+    print "Created a dump file dump.wlf.\nTo view waveforms, open with\nvsim -view dataset=dump.wlf"
+  else:
+    print "Did not create a dump file...something went wrong"
+    sys.exit(1)
+  return
+
+def compile_assemble():
+  print_separator(1)
+
+  print "Compiling " + prog_file
+  retval = bin_exists(bin_root + "/assemble.sh")
+  if not retval and os.access(prog_file, os.R_OK):
+    c0 = bin_root + "/assemble.sh " + prog_file
+    if brief:
+      c0 = c0 + " >> wsrun.log"
+    dummy = os.system(c0)
+  elif not os.access(prog_file, os.R_OK):
+    print "Did not find program to compile (" + prog_file + ")"
+    sys.exit(1)
+  else:
+    print "Could not find the assembler assemble.sh in your PATH"
+    sys.exit(1)
+  return
+
+def bin_exists(name):
+  return 0
+  retval = os.system("which " + name + " > /dev/null")
+  return retval
+
+def run_arch_sim():
+  global bin_root
+  global trace_ext
+  global simulation_results
+  global n_failures
+  global pipeline_mode
+  global prog_file
+  relax_diff = 1
+  retval = 0
+  if not len(prog_file):
+    return
+  print_separator(1)
+  print "Running arch simulator wiscalculator..."
+  if aligned:
+    c0 = bin_root + "/wiscalculator -align loadfile_all.img > archsim.out"
+  else:
+    c0 = bin_root + "/wiscalculator loadfile_all.img > archsim.out"
+  dummy = os.system(c0)
+  if not os.access("archsim.trace", os.R_OK):
+    print "Running wiscalcualtor did not create trace...something wrong. Contact cs552 staff"
+    sys.exit(1)
+  if not os.access("verilogsim" + trace_ext, os.R_OK):
+    print "Did not find verilog simulation trace (verilogsim" + trace_ext + ")...something wrong. Contact cs552 staff"
+    sys.exit(1)
+  print_separator(1)
+  print "Comparing arch simulation trace against verilog simulation trace"
+  if not pipeline_mode:
+    c0 = bin_root + "/wsdiff.pl " + prog_file + " archsim.trace verilogsim.trace > diff.trace"
+    dummy = os.system(c0)
+    c0 = "diff archsim.trace verilogsim.trace"
+    retval = os.system(c0)
+  else:
+    c0 = bin_root + "/wsdiff2.pl " + prog_file + " archsim.trace archsim.ptrace verilogsim.ptrace > diff.ptrace"
+    dummy = os.system(c0)
+    c0 = bin_root + "/wsdiff2.pl -relax " + prog_file + " archsim.trace archsim.ptrace verilogsim.ptrace > /dev/null"
+    relax_diff = os.system(c0)
+    c0 = "diff archsim.ptrace verilogsim.ptrace"
+    retval = os.system(c0)
+  if retval:
+    print "FAILED. See differences in diff" + trace_ext + ". Search for ***DIFF***"
+    if not relax_diff:
+      print "RELAX-PASS: Relaxed diff passed. Most likely multiple writes to memory, register file, or mulitples reads from memory"
+      simulation_results[prog_file] = "RELAX-PASS"
+    print "Use kompare archsim" + trace_ext + "verilogsim" + trace_ext + " to see differences side by side."
+    print "OR use tkdiff.tcl archsim" + trace_ext + " verilogsim" + trace_ext + " to see differences side by side."
+    print "Open dump.wlf in modelsim using, vsim -view dataset=dump.wlf"
+    print "Program source listing and raw bits are in loadfile.list. Open using gedit loadfile.lst"
+
+    n_failures = n_failures + 1
+  else:
+    cmd = "grep sim_cycles verilogsim.log"
+    nsim_cycles = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE).communicate()[0].split()
+    if len(nsim_cycles) > 2:
+      nsim_cycles = nsim_cycles[2].strip()
+    else:
+      nsim_cycles = '0'
+    cmd = "grep inst_count verilogsim.log"
+    nsim_icount = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE).communicate()[0].split()
+    if len(nsim_icount) > 2:
+      nsim_icount = nsim_icount[2].strip()
+    else:
+      nsim_icount = '0'
+    cmd = "grep dcachehit_count verilogsim.log"
+    dcachehit_icount = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE).communicate()[0].split()
+    if len(dcachehit_icount) > 2:
+      dcachehit_icount = dcachehit_icount[2].strip()
+    else:
+      dcachehit_icount = '0'
+    cmd = "grep icachehit_count verilogsim.log"
+    icachehit_icount = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE).communicate()[0].split()
+    if len(icachehit_icount) > 2:
+      icachehit_icount = icachehit_icount[2].strip()
+    else:
+      icachehit_icount = '0'
+    cmd = "grep dcachereq_count verilogsim.log"
+    dcachereq_count = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE).communicate()[0].split()
+    if len(dcachereq_count) > 2:
+      dcachereq_count = dcachereq_count[2].strip()
+    else:
+      dcachereq_count = '0'
+    cmd = "grep icachereq_count verilogsim.log"
+    icachereq_count = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE).communicate()[0].split()
+    if len(icachereq_count) > 2:
+      icachereq_count = icachereq_count[2].strip()
+    else:
+      icachereq_count = '0'
+
+    cpi = str(round(float(nsim_cycles) / float(nsim_icount), 1))
+    if int(dcachereq_count) == 0:
+      dhit_rate = str(0)
+    else:
+      dhit_rate = str(round(100 * float(dcachehit_icount) / float(dcachereq_count), 1))
+    if int(icachereq_count) == 0:
+      ihit_rate = str(0)
+    else:
+      ihit_rate = str(round(100 * float(icachehit_icount) / float(icachereq_count), 1))
+    print "SUCCESS. Simulations match for " + prog_file + "."
+    simulation_results[prog_file] = "SUCCESS CPI:" + cpi + " CYCLES:" + nsim_cycles + " ICOUNT:" + nsim_icount + " IHITRATE: " + ihit_rate + " DHITRATE: " + dhit_rate
+  return
+
+def print_separator(inc_step_count = 0):
+  global step_count
+  separator = "-------------------------------------------------"
+  print separator
+  if inc_step_count:
+    print "Step: ", step_count
+    step_count = step_count + 1
+  return
+
+def print_usage():
+  print """Usage: wsrun.py [options]  <top module name> <list of verilog files>
+
+
+       Options:
+                       [-wave] 
+                       [-do <do filename>] 
+                       [-prog <assemble file to run>] 
+                       [-addr <address trace file to use for mem_system_perfbench>] 
+                       [-list <filename with list of assembly files>]
+                       [-n <number of cycles to simulate>]
+                       [-help]
+                       [-brief]"""
+  return
+
+def hextobinary(hex_string):
+
+  hex_string = hex_string.lower()
+
+  hextobinary_map = {"0":"0000", "1":"0001", "2":"0010", "3":"0011", "4":"0100", "5":"0101", "6":"0110", "7":"0111", "8":"1000", "9":"1001", "a":"1010", "b":"1011", "c":"1100", "d":"1101", "e":"1110", "f":"1111"}
+
+  binary_string = ""
+  for index in range(len(hex_string)):
+    binary_string = binary_string + " " + hextobinary_map[hex_string[index]]
+
+  return binary_string
+
+
+
+sys.argv.pop(0)
+
+if len(sys.argv) < 1:
+  print_usage()
+  sys.exit(1)
+
+while True:
+  first_arg = sys.argv[0]
+  if re.match(r'^-', first_arg):
+    if re.match(r'^-compileonly', first_arg):
+      compileonly = 1
+    if re.match(r'^-align', first_arg):
+      aligned = 1
+    if re.match(r'^-pipe', first_arg):
+      pipeline_mode = 1
+      trace_ext = ".ptrace"
+    if re.match(r'^-help', first_arg):
+      print_usage()
+      sys.exit(0)
+    if re.match(r'^-seed', first_arg):
+      sys.argv.pop(0)
+      seed = sys.argv[0]
+    if re.match(r'^-args', first_arg):
+      sys.argv.pop(0)
+      args = sys.argv[0]
+    if re.match(r'^-n', first_arg):
+      sys.argv.pop(0)
+      n_cycles = sys.argv[0]
+    if re.match(r'^-brief', first_arg):
+      brief = 1
+    if re.match(r'^-maxf', first_arg):
+      sys.argv.pop(0)
+      max_failures = sys.argv[0]
+    if re.match(r'^-wave', first_arg):
+      open_wave_viewer = 1
+    if re.match(r'^-do', first_arg):
+      sys.argv.pop(0)
+      do_file = sys.argv[0]
+    if re.match(r'^-prog', first_arg):
+      sys.argv.pop(0)
+#      prog_file = sys.argv[0]
+      prog_list.append(sys.argv[0])
+    if re.match(r'^-addr', first_arg):
+      sys.argv.pop(0)
+      addr_file = sys.argv[0]
+#      $addr_file =~ s/\//\/\//g; //Why replace "/" in addr_file by "//"?
+#      addr_file = re.sub(r'/', r'//', addr_file)
+    if re.match(r'^-list', first_arg):
+      sys.argv.pop(0)
+      file_list = sys.argv[0]
+      if not os.access(file_list, os.R_OK):
+        print "Cannot find file list " + file_list
+        sys.exit(1)
+      fd = open(file_list)
+      lines = fd.readlines()
+      prog_list = [line.strip() for line in lines]
+      fd.close()
+    sys.argv.pop(0)
+  else:
+    break
+
+if len(prog_list):
+  if bin_exists(bin_root + "/wiscalculator"): #Returns 0 if exists
+    print "Cannot find wiscalculator in your path. Add /u/s/i/sinclair/public/html/courses/cs552/spring2019/handouts/bins to your path"
+    sys.exit(1)
+
+iter_count = 0
+simulation_results = {}
+
+if len(prog_list):
+  for prog in prog_list:
+    prog_file = prog
+    if len(prog_file) <= 1:
+      continue
+    print "Program " + str(iter_count) + " " + prog_file
+    simulation_results[prog_file] = "FAILED"
+    compile_assemble()
+    if not iter_count:
+      compile_verilog()
+    run_verilog()
+    run_arch_sim()
+    iter_count = iter_count + 1
+    step_count = 1
+    if n_failures > max_failures:
+      print "Too many failures...stopping early"
+      break
+
+  print_separator(0);
+  print "Final log, saved in summary.log"
+  fd = open("summary.log", 'w')
+  for prog in sorted(simulation_results.keys()):
+    result = simulation_results[prog]
+    print prog, " ", result
+    fd.write(prog + " " + result + "\n")
+  fd.close()
+else:
+  compile_verilog()
+  if not compileonly:
+    run_verilog()
+
+if open_wave_viewer:
+  dummy = os.system("vsim -view dataset=dump.wlf")

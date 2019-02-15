@@ -1,0 +1,8 @@
+#!/bin/sh
+
+for a in `ps ax | grep wsrun.pl | grep -v grep | cut -d' ' -f1`; do
+    echo "killing process" $a;
+    ps -p $a | tail -n1;
+       kill -9 $a; 
+done
+    
